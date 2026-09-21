@@ -2,8 +2,8 @@
   "name": "turbo_store",
   "version": "0.1.0",
   "description": "Document-level reactive store for Rails with Turbo Stream sync",
-  "main": "app/javascript/turbo_store.js",
-  "module": "app/javascript/turbo_store.js",
+  "main": "./app/javascript/turbo_store.js",
+  "module": "./app/javascript/turbo_store.js",
   "type": "module",
   "files": [
     "app/javascript/**/*.js"
