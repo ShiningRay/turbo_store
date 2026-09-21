@@ -9,9 +9,12 @@ TurboStore combines Alpine.js's lightweight reactivity with Rails Turbo Streams,
 - **Document-level reactive store** powered by Alpine.js
 - **Turbo Stream action** `update_store` to sync server state to client store
 - **ERB helpers** to seed initial state and emit store updates
-- **Zero build step** — works with Rails importmap out of the box
+- **Dual frontend support** — works with both importmap-rails and jsbundling-rails
+- **Zero build step** for importmap; npm package for jsbundling
 
 ## Installation
+
+### Option A: importmap-rails (no build step)
 
 Add to your Gemfile:
 
@@ -25,18 +28,35 @@ Then:
 bundle install
 ```
 
-Pin the JS in `config/importmap.rb`:
-
-```ruby
-pin "turbo_store", to: "turbo_store.js"
-pin "alpinejs", to: "https://cdn.jsdelivr.net/npm/alpinejs@3.14.1/dist/module.esm.js"
-```
-
-Import in `app/javascript/application.js`:
+The gem automatically pins `turbo_store` and `alpinejs` in your importmap. Import in `app/javascript/application.js`:
 
 ```javascript
 import "turbo_store"
 ```
+
+### Option B: jsbundling-rails (esbuild / webpack / rollup)
+
+Add to your Gemfile:
+
+```ruby
+gem "turbo_store", github: "ShiningRay/turbo_store"
+```
+
+Then install the npm package:
+
+```bash
+yarn add turbo_store@https://github.com/ShiningRay/turbo_store
+# or
+npm install turbo_store@https://github.com/ShiningRay/turbo_store
+```
+
+Import in your entrypoint (e.g. `app/javascript/application.js`):
+
+```javascript
+import "turbo_store"
+```
+
+The npm package bundles Alpine.js as a dependency, so no extra setup is needed.
 
 ## Usage
 
